@@ -1,5 +1,3 @@
-'use client';
-
 import React, { FC, MouseEvent } from 'react';
 import { IconType } from 'react-icons';
 

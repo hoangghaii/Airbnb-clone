@@ -1,5 +1,3 @@
-'use client';
-
 import { FC } from 'react';
 
 import Container from '@/components/Container';
@@ -9,10 +7,11 @@ import UserMenu from '@/components/navbar/UserMenu';
 import { SafeUser } from '@/types';
 
 type Props = {
-  currentUser?: SafeUser;
+  currentUser: SafeUser | null;
 };
 
-const Navbar: FC<Props> = ({ currentUser }: Props) => {
+// eslint-disable-next-line no-unused-vars
+const Navbar: FC<Props> = ({ currentUser = null }: Props) => {
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">
@@ -20,7 +19,7 @@ const Navbar: FC<Props> = ({ currentUser }: Props) => {
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
             <Logo />
             <Search />
-            <UserMenu />
+            <UserMenu currentUser={currentUser} />
           </div>
         </Container>
       </div>

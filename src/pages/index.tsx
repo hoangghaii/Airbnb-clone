@@ -1,6 +1,8 @@
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Nunito } from 'next/font/google';
 import Head from 'next/head';
 
+import { getCurrentUser } from '@/actions';
 import LoginModal from '@/components/modals/LoginModal';
 import RegisterModal from '@/components/modals/RegisterModal';
 import Navbar from '@/components/navbar/Navbar';
@@ -8,7 +10,17 @@ import ToasterProvider from '@/providers/ToasterProvider';
 
 const font = Nunito({ subsets: ['latin'] });
 
-export default function Home() {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const currentUser = await getCurrentUser(req, res);
+
+  return {
+    props: { currentUser },
+  };
+};
+
+export default function Home({
+  currentUser,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <Head>
@@ -27,7 +39,7 @@ export default function Home() {
         <ToasterProvider />
         <LoginModal />
         <RegisterModal />
-        <Navbar />
+        <Navbar currentUser={currentUser} />
       </main>
     </>
   );

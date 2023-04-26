@@ -1,5 +1,3 @@
-'use client';
-
 import { useRouter, useSearchParams } from 'next/navigation';
 import qs from 'query-string';
 import React, { FC, useCallback } from 'react';

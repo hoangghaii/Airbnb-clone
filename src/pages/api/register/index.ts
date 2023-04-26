@@ -1,15 +1,19 @@
 import bcrypt from 'bcrypt';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/libs';
 import { RegisterBody } from '@/types';
 
-export default async function handle(request: Request, response: any) {
+export default async function handle(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
   if (request.method === 'POST') {
     await POST(request, response);
   }
 }
 
-async function POST(request: Request, response: any) {
+async function POST(request: NextApiRequest, response: NextApiResponse) {
   const body = request.body as unknown as RegisterBody;
 
   const { email, name, password } = body;
