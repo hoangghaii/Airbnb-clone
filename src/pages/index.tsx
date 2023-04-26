@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { getCurrentUser } from '@/actions';
 import LoginModal from '@/components/modals/LoginModal';
 import RegisterModal from '@/components/modals/RegisterModal';
+import RentModal from '@/components/modals/RentModal';
 import Navbar from '@/components/navbar/Navbar';
 import ToasterProvider from '@/providers/ToasterProvider';
 
@@ -39,6 +40,7 @@ export default function Home({
         <ToasterProvider />
         <LoginModal />
         <RegisterModal />
+        <RentModal />
         <Navbar currentUser={currentUser} />
       </main>
     </>

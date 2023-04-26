@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 
 const Logo: FC = () => {
-  // eslint-disable-next-line no-unused-vars
   const router = useRouter();
 
   return (
@@ -13,6 +12,7 @@ const Logo: FC = () => {
       height={100}
       width={100}
       src="/images/logo.png"
+      onClick={() => router.push('/')}
     />
   );
 };
