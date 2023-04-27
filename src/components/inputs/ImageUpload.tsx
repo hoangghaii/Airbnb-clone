@@ -8,7 +8,7 @@ declare global {
   var cloudinary: any;
 }
 
-const uploadPreset = 'pgc9ehd5';
+const uploadPreset = 'lxaklsqo';
 
 type Props = {
   onChange: (value: string) => void;
@@ -35,7 +35,7 @@ const ImageUpload: FC<Props> = ({ onChange, value }: Props) => {
         return (
           <div
             onClick={() => open?.()}
-            className="relative cursor-pointer hover:opacity-70 transition border-dashed  border-2  p-20  border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-600"
+            className="relative cursor-pointer hover:opacity-70 transition border-dashed border-2 p-20 border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-600"
           >
             <TbPhotoPlus size={50} />
             <div className="font-semibold text-lg">Click to upload</div>
@@ -45,7 +45,7 @@ const ImageUpload: FC<Props> = ({ onChange, value }: Props) => {
                   fill
                   style={{ objectFit: 'cover' }}
                   src={value}
-                  alt="House"
+                  alt="Upload image"
                 />
               </div>
             )}

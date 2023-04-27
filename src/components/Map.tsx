@@ -3,7 +3,7 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
 // @ts-ignore
@@ -15,14 +15,13 @@ L.Icon.Default.mergeOptions({
 });
 
 const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-const attribution =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const attribution = '';
 
 type Props = {
   center?: number[];
 };
 
-const Map: FC<Props> = ({ center = [51, -0.09] }: Props) => {
+const Map: FC<Props> = ({ center = [16.4704, 107.6009] }: Props) => {
   return (
     <MapContainer
       center={center as L.LatLngExpression}
