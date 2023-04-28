@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import Container from '@/components/Container';
-import Categories from '@/components/navbar/Categories';
 import Logo from '@/components/navbar/Logo';
 import Search from '@/components/navbar/Search';
 import UserMenu from '@/components/navbar/UserMenu';
@@ -24,7 +23,6 @@ const Navbar: FC<Props> = ({ currentUser = null }: Props) => {
           </div>
         </Container>
       </div>
-      <Categories />
     </div>
   );
 };

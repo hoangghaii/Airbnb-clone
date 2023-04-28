@@ -20,19 +20,21 @@ type Props = {
   disabled?: boolean;
   secondaryActionLabel?: string;
   secondaryAction?: () => void;
+  disabledSecondaryAction?: boolean;
 };
 
 const Modal: FC<Props> = ({
-  isOpen,
+  isOpen = false,
   onClose,
   onSubmit,
-  title,
-  body,
-  footer,
+  title = '',
+  body = undefined,
+  footer = undefined,
   actionLabel,
   disabled,
-  secondaryActionLabel,
+  secondaryActionLabel = '',
   secondaryAction,
+  disabledSecondaryAction = false,
 }: Props) => {
   const [showModal, setShowModal] = useState(isOpen);
 
@@ -60,12 +62,12 @@ const Modal: FC<Props> = ({
   }, [onSubmit, disabled]);
 
   const handleSecondaryAction = useCallback(() => {
-    if (disabled || !secondaryAction) {
+    if (disabledSecondaryAction || !secondaryAction) {
       return;
     }
 
     secondaryAction();
-  }, [secondaryAction, disabled]);
+  }, [secondaryAction, disabledSecondaryAction]);
 
   if (!isOpen) {
     return null;
@@ -101,7 +103,7 @@ const Modal: FC<Props> = ({
                 <div className="flex flex-row items-center gap-4 w-ful">
                   {secondaryAction && secondaryActionLabel && (
                     <Button
-                      disabled={disabled}
+                      disabled={disabledSecondaryAction}
                       label={secondaryActionLabel}
                       onClick={handleSecondaryAction}
                       outline

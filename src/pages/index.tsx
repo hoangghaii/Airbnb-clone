@@ -1,48 +1,55 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { Nunito } from 'next/font/google';
 import Head from 'next/head';
+import { FC } from 'react';
 
-import { getCurrentUser } from '@/actions';
-import LoginModal from '@/components/modals/LoginModal';
-import RegisterModal from '@/components/modals/RegisterModal';
-import RentModal from '@/components/modals/RentModal';
-import Navbar from '@/components/navbar/Navbar';
-import ToasterProvider from '@/providers/ToasterProvider';
+import { getCurrentUser, getListings } from '@/actions';
+import Container from '@/components/Container';
+import EmptyState from '@/components/EmptyState';
+import ListingCard from '@/components/listings/ListingCard';
+import Categories from '@/components/navbar/Categories';
 
-const font = Nunito({ subsets: ['latin'] });
-
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query,
+}) => {
   const currentUser = await getCurrentUser(req, res);
+  const listings = await getListings(query);
 
   return {
-    props: { currentUser },
+    props: { currentUser, listings },
   };
 };
 
-export default function Home({
+const Home: FC = ({
   currentUser,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  listings,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  if (listings.length === 0) {
+    return <EmptyState showReset isHomePage />;
+  }
+
   return (
     <>
       <Head>
         <title>Airbnb</title>
-        <meta
-          name="description"
-          content="Airbnb: Vacation Rentals, Cabins, Beach Houses, Unique Homes & Experiences"
-        />
-        <link
-          rel="shortcut icon"
-          href="/images/favicon.ico"
-          type="image/x-icon"
-        />
       </Head>
-      <main className={`${font.className}`}>
-        <ToasterProvider />
-        <LoginModal />
-        <RegisterModal />
-        <RentModal />
-        <Navbar currentUser={currentUser} />
-      </main>
+      <>
+        <Categories />
+        <Container>
+          <div className="pt-24 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+            {listings.map((listing: any) => (
+              <ListingCard
+                currentUser={currentUser}
+                key={listing.id}
+                data={listing}
+              />
+            ))}
+          </div>
+        </Container>
+      </>
     </>
   );
-}
+};
+
+export default Home;

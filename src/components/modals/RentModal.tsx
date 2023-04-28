@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
-import { FC, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
@@ -16,6 +15,7 @@ import Modal from '@/components/modals/Modal';
 import { categories } from '@/components/navbar/Categories';
 import { useRentModal } from '@/hooks';
 
+/* eslint-disable no-unused-vars */
 enum STEPS {
   CATEGORY = 0,
   LOCATION = 1,
@@ -53,12 +53,15 @@ const RentModal: FC = () => {
     },
   });
 
-  const location = watch('location');
   const category = watch('category');
+  const location = watch('location');
   const guestCount = watch('guestCount');
   const roomCount = watch('roomCount');
   const bathroomCount = watch('bathroomCount');
   const imageSrc = watch('imageSrc');
+  const price = watch('price');
+  const title = watch('title');
+  const description = watch('description');
 
   const Map = useMemo(
     () =>
@@ -218,7 +221,6 @@ const RentModal: FC = () => {
         <Input
           id="title"
           label="Title"
-          disabled={isLoading}
           register={register}
           errors={errors}
           required
@@ -227,7 +229,6 @@ const RentModal: FC = () => {
         <Input
           id="description"
           label="Description"
-          disabled={isLoading}
           register={register}
           errors={errors}
           required
@@ -256,6 +257,32 @@ const RentModal: FC = () => {
       </div>
     );
   }
+
+  useEffect(() => {
+    if (
+      (step === STEPS.CATEGORY && !category) ||
+      (step === STEPS.LOCATION && !location) ||
+      (step === STEPS.INFO && (!guestCount || !roomCount || !bathroomCount)) ||
+      (step === STEPS.IMAGES && !imageSrc) ||
+      (step === STEPS.DESCRIPTION && (!title || !description)) ||
+      (step === STEPS.PRICE && !price)
+    ) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+  }, [
+    bathroomCount,
+    category,
+    description,
+    guestCount,
+    imageSrc,
+    location,
+    price,
+    roomCount,
+    step,
+    title,
+  ]);
 
   return (
     <Modal

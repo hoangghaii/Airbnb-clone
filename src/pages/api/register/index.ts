@@ -18,15 +18,19 @@ async function POST(request: NextApiRequest, response: NextApiResponse) {
 
   const { email, name, password } = body;
 
-  const hashedPassword = await bcrypt.hash(password, 12);
+  try {
+    const hashedPassword = await bcrypt.hash(password, 12);
 
-  const user = await prisma.user.create({
-    data: {
-      email,
-      name,
-      hashedPassword,
-    },
-  });
+    const user = await prisma.user.create({
+      data: {
+        email,
+        name,
+        hashedPassword,
+      },
+    });
 
-  return response.json(user);
+    return response.status(200).json(user);
+  } catch (error) {
+    return response.status(500).json({ message: error });
+  }
 }

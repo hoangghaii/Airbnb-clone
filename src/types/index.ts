@@ -30,3 +30,21 @@ export type RegisterBody = {
   name: string;
   password: string;
 };
+
+export type ListingRequestBody = {
+  location: {
+    flag: string;
+    label: string;
+    value: string;
+    region: string;
+    latlng: number[];
+  };
+  category: string;
+  guestCount: number;
+  roomCount: number;
+  bathroomCount: number;
+  imageSrc: string;
+  price: string;
+  title: string;
+  description: string;
+};
