@@ -48,3 +48,10 @@ export type ListingRequestBody = {
   title: string;
   description: string;
 };
+
+export type ReservationRequestBody = {
+  totalPrice: number;
+  startDate: string;
+  endDate: string;
+  listingId: string;
+};
