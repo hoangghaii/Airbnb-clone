@@ -1,8 +1,11 @@
 import { prisma } from '@/libs';
-import { SafeUser } from '@/types';
 
-export const getFavoriteListings = async (currentUser: SafeUser) => {
+import { getCurrentUser } from './getCurrentUser';
+
+export const getFavoriteListings = async (req: any, res: any) => {
   try {
+    const currentUser = await getCurrentUser(req, res);
+
     if (!currentUser) {
       return [];
     }

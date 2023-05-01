@@ -20,23 +20,20 @@ async function DELETE(request: NextApiRequest, response: NextApiResponse) {
       return response.status(401).json({ message: 'Unauthorized' });
     }
 
-    const { reservationId } = request.query;
+    const { listingId } = request.query;
 
-    if (!reservationId || typeof reservationId !== 'string') {
+    if (!listingId || typeof listingId !== 'string') {
       return response.status(401).json({ message: 'Invalid ID' });
     }
 
-    const reservation = await prisma.reservation.deleteMany({
+    const listing = await prisma.listing.deleteMany({
       where: {
-        id: reservationId,
-        OR: [
-          { userId: currentUser.id },
-          { listing: { userId: currentUser.id } },
-        ],
+        id: listingId,
+        userId: currentUser.id,
       },
     });
 
-    return response.status(200).json(reservation);
+    return response.status(200).json(listing);
   } catch (error) {
     return response.status(500).json({ message: error });
   }
