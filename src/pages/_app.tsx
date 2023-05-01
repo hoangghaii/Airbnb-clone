@@ -5,6 +5,7 @@ import Head from 'next/head';
 import LoginModal from '@/components/modals/LoginModal';
 import RegisterModal from '@/components/modals/RegisterModal';
 import RentModal from '@/components/modals/RentModal';
+import SearchModal from '@/components/modals/SearchModal';
 import Navbar from '@/components/navbar/Navbar';
 import ToasterProvider from '@/providers/ToasterProvider';
 import '@/styles/globals.css';
@@ -33,6 +34,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <LoginModal />
         <RegisterModal />
         <RentModal />
+        <SearchModal />
         <Navbar currentUser={currentUser} />
       </main>
       <div className="pb-20 pt-28">

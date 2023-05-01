@@ -35,21 +35,15 @@ export const getListings = async (params: Props) => {
     }
 
     if (roomCount) {
-      query.roomCount = {
-        gte: +roomCount,
-      };
+      query.roomCount = +roomCount;
     }
 
     if (guestCount) {
-      query.guestCount = {
-        gte: +guestCount,
-      };
+      query.guestCount = +guestCount;
     }
 
     if (bathroomCount) {
-      query.bathroomCount = {
-        gte: +bathroomCount,
-      };
+      query.bathroomCount = +bathroomCount;
     }
 
     if (locationValue) {
@@ -62,12 +56,12 @@ export const getListings = async (params: Props) => {
           some: {
             OR: [
               {
-                endDate: { gte: startDate },
-                startDate: { lte: startDate },
+                endDate: startDate,
+                startDate: startDate,
               },
               {
-                startDate: { lte: endDate },
-                endDate: { gte: endDate },
+                startDate: endDate,
+                endDate: endDate,
               },
             ],
           },
