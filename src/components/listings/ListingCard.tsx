@@ -68,10 +68,10 @@ const ListingCard: FC<Props> = ({
   return (
     <div
       onClick={() => router.push(`/listings/${data.id}`)}
-      className="col-span-1 cursor-pointer group"
+      className="col-span-1 cursor-pointer group p-3 rounded-xl bg-neutral-200/50 shadow-lg shadow-neutral-200/50 hover:shadow-neutral-200 hover:-translate-y-2 transition"
     >
-      <div className="flex flex-col gap-2 w-full">
-        <div className="aspect-square w-full relative overflow-hidden rounded-xl">
+      <div className="flex flex-col w-full">
+        <div className="aspect-square w-full relative overflow-hidden rounded-xl mb-3">
           <Image
             fill
             className="object-cover h-full w-full group-hover:scale-110 transition"
